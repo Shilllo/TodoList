@@ -111,10 +111,9 @@ footer > div > svg {
     gap: 10px;
     padding: 15px;
     flex-wrap: wrap;
-    justify-content: center;
 }
 
-.block {
+.block, #todoForm {
     width: 200px;
     height: 250px;
     background-color: rgb(99, 87, 23);
@@ -161,3 +160,21 @@ footer > div > svg {
     border-radius: 15px;
     padding: 5px
   }
+
+#todoForm > label {
+    color: #DDEFBB;
+}
+
+#todoForm > .buttons > button {
+    background-color: rgb(99, 87, 23);
+    border-radius: 15%;
+    color: #DDEFBB;
+    border: 3px solid rgb(173, 158, 70);
+    font-weight: bold;
+    width: 180px;
+} 
+
+#todoForm > .buttons > button:hover {
+    border: 3px solid rgb(99, 87, 23);
+    background-color: rgb(173, 158, 70);
+}

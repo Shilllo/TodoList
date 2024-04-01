@@ -1,9 +1,10 @@
-import { showProject } from "./showProject"
+import { showProject } from "./Project"
 
 class Storage {
     constructor() {
         if (localStorage.getItem('Storage')) {
             this.storage = JSON.parse(localStorage.getItem('Storage'))
+            showProject(this.storage['Inbox'])
         } else {
             this.storage = {
                 'Inbox': [],

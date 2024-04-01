@@ -1,7 +1,10 @@
 function showProject(storage) {
     let content = document.querySelector('#content')
-    content.innerText = ""
 
+    const childElements = content.querySelectorAll(':scope > :not(:first-child)');
+
+    childElements.forEach(child => child.remove());
+    
     for (let i = 0; i < storage.length; i++) {
         let block = document.createElement('div')
         block.classList.add('block')
