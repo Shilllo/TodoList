@@ -4,7 +4,7 @@ function showProject(storage) {
     const childElements = content.querySelectorAll(':scope > :not(:first-child)');
 
     childElements.forEach(child => child.remove());
-    
+
     for (let i = 0; i < storage.length; i++) {
         let block = document.createElement('div')
         block.classList.add('block')
@@ -60,4 +60,20 @@ function showProject(storage) {
     }
 }
 
-export { showProject }
+function addProject(projectName, instance) {
+    let project = document.createElement('button')
+    project.textContent = projectName
+    project.classList.add('project')
+
+    if (projectName == 'Inbox' || projectName == 'Today' || projectName == 'Week') {
+        let container = document.querySelector('#defaultProjects')
+        container.appendChild(project)
+    } else {
+        let container = document.querySelector('#customProjects')
+        container.appendChild(project)
+    }
+    
+    instance.createProject(projectName)
+}
+
+export { showProject, addProject}
