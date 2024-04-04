@@ -30,6 +30,18 @@ function startEvents(instance) {
                     projectForm.remove();
                 }
             })
+
+            document.querySelector('#projectForm').addEventListener('keypress', function(event) {
+                if (event.keyCode === 13) {
+                  // Стоп, отправка отменена!
+                  event.preventDefault();
+                  if (document.querySelector('#projectName').value) {
+                    let projectName = document.querySelector('#projectName').value.toString()
+                    addProject(projectName, instance)
+                    projectForm.remove();
+                    }
+                }
+              });
         }
     })
 }
