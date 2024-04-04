@@ -11,11 +11,11 @@
     </header>
 
     <div id="sidebar">
-        <div>Projects</div>
+        <div id="projectHeader">Projects</div>
         <div id="defaultProjects">
-            <button class="project">Inbox</button>
-            <button class="project">Today</button>
-            <button class="project">This week</button>
+            <button class="project" id="Inbox">Inbox</button>
+            <button class="project" id="Today">Today</button>
+            <button class="project" id="Week">Week</button>
         </div>
         <div id="customProjects"></div>
 
@@ -31,14 +31,8 @@
             <input type="text" id="description">
             <label for="date">Date</label>
             <input type="text" id="date">
-            <select class="status">
-                <option value="notStarted">Not started</option>
-                <option value="inProgress">In progress</option>
-                <option value="done">Done</option>
-            </select>
-
             <div class="buttons">
-                <button type="button">Create</button>
+                <button id="createTodo" type="button">Create</button>
             </div>
         </form>
         <div class="block">

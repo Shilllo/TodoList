@@ -1,10 +1,11 @@
 import { showProject } from "./Project"
+import { openProject } from "./events"
 
 class Storage {
     constructor() {
         if (localStorage.getItem('Storage')) {
             this.storage = JSON.parse(localStorage.getItem('Storage'))
-            showProject(this.storage['Inbox'])
+            showProject('Inbox')
 
             let customProjects = document.querySelector('#customProjects')
             for (let key in this.storage) {
@@ -13,9 +14,13 @@ class Storage {
                     let project = document.createElement('button')
                     project.classList.add('project')
                     project.textContent = key
+                    let id = key.split(' ').join('-')
+                    project.setAttribute('id', id)
                     customProjects.appendChild(project)
                 }
+                openProject(key)
             }
+            document.querySelector('#projectHeader').textContent = `Projects: Inbox`
         } else {
             this.storage = {
                 'Inbox': [],
@@ -23,7 +28,11 @@ class Storage {
                 'Week': []
             }
             this.refreshLocalStorage(this.storage)
-            showProject(this.storage['Inbox'])
+            showProject('Inbox')
+            for (let key in this.storage) {
+                openProject(key)
+            }
+            document.querySelector('#projectHeader').textContent = `Projects: Inbox`
         }
     }
 
@@ -34,13 +43,13 @@ class Storage {
     createProject(projectName) {
         this.storage[projectName] = []
         this.refreshLocalStorage(this.storage)
-        showProject(this.storage[projectName])
+        showProject(projectName)
     }
 
     createTodo(projectName, content) {
         this.storage[projectName].push(content)
         this.refreshLocalStorage(this.storage)
-        showProject(this.storage[projectName])
+        showProject(projectName)
     }
 
     removeTodo(projectName, todoTitle) {
@@ -48,7 +57,7 @@ class Storage {
             if (this.storage[projectName][i]['title'] == todoTitle) {
                 this.storage[projectName].splice(i, 1)
                 this.refreshLocalStorage(this.storage)
-                showProject(this.storage[projectName])
+                showProject(projectName)
             }
         }
     }
@@ -60,6 +69,10 @@ class Storage {
     set currentStorage(value) {
         this.storage = value
     }
+
+    // get currentProject() {
+    //     return 
+    // }
 }
 
 export { Storage }
