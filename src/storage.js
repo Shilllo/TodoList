@@ -5,6 +5,17 @@ class Storage {
         if (localStorage.getItem('Storage')) {
             this.storage = JSON.parse(localStorage.getItem('Storage'))
             showProject(this.storage['Inbox'])
+
+            let customProjects = document.querySelector('#customProjects')
+            for (let key in this.storage) {
+                let defaultt = ['Inbox', 'Today', 'Week']
+                if (!defaultt.includes(key)) {
+                    let project = document.createElement('button')
+                    project.classList.add('project')
+                    project.textContent = key
+                    customProjects.appendChild(project)
+                }
+            }
         } else {
             this.storage = {
                 'Inbox': [],
@@ -48,7 +59,6 @@ class Storage {
     
     set currentStorage(value) {
         this.storage = value
-        
     }
 }
 

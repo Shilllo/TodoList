@@ -72,7 +72,7 @@ function addProject(projectName, instance) {
         let container = document.querySelector('#customProjects')
         container.appendChild(project)
     }
-    
+
     instance.createProject(projectName)
 }
 
