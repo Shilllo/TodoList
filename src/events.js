@@ -27,6 +27,7 @@ function createProject(instance) {
                 if (document.querySelector('#projectName').value) {
                     let projectName = document.querySelector('#projectName').value.toString()
                     addProject(projectName, instance)
+                    openProject(document.querySelector('#projectName').value, instance)
                     instance.refreshEvents() 
                     projectForm.remove();
                 }
@@ -38,6 +39,7 @@ function createProject(instance) {
                   if (document.querySelector('#projectName').value) {
                     let projectName = document.querySelector('#projectName').value.toString()
                     addProject(projectName, instance)
+                    openProject(document.querySelector('#projectName').value, instance)
                     instance.refreshEvents() 
                     projectForm.remove();
                     }
@@ -59,10 +61,11 @@ function createTodo(instance) {
                 'description': description,
                 'date': date
             }
-            instance.createTodo(document.querySelector('#projectHeader').textContent.slice(10), todo)
             document.querySelector('#title').value = ""
             document.querySelector('#description').value = ""
-            document.querySelector('#title').value = ""
+            document.querySelector('#date').value = ""
+
+            instance.createTodo(document.querySelector('#projectHeader').textContent.slice(10), todo)
         }
     })
 }
@@ -71,13 +74,30 @@ function openProject(projectName, instance) {
     let name = projectName.split(' ').join('-')
     document.querySelector(`#${name}`).addEventListener('click', function() {
         showProject(projectName)
-        addRemoveEvents(instance, 1)
+        instance.refreshEvents()
         document.querySelector('#projectHeader').textContent = `Projects: ${projectName}`
     })
+}
+
+function addRemoveEvents(instance, flag = 1) {
+    let btns = document.querySelectorAll('.removeBtn')
+    let projectName = document.querySelector('#projectHeader').textContent.slice(10)
+    for (let i = 0; i < btns.length; i++) {
+        let id = btns[i].id
+        document.querySelector(`#${id}`).addEventListener('click', function() {
+            console.log(projectName)
+            console.log(id)
+            console.log(flag)
+            if (flag) {
+                instance.removeTodo(projectName, id)
+            }
+        })
+    }
 }
 
 export {
     createProject, 
     createTodo,
     openProject,
+    addRemoveEvents
 }
