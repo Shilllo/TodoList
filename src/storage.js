@@ -1,12 +1,11 @@
 import { showProject } from "./Project"
-import { addRemoveEvents } from "./events"
 
 class Storage {
     constructor() {
         if (localStorage.getItem('Storage')) {
             this.storage = JSON.parse(localStorage.getItem('Storage'))
             showProject('Inbox')
-
+            let self = this
             let customProjects = document.querySelector('#customProjects')
             for (let key in this.storage) {
                 let defaultt = ['Inbox', 'Today', 'Week']
@@ -18,24 +17,13 @@ class Storage {
                     project.setAttribute('id', id)
                     customProjects.appendChild(project)
                 }
-                // openProject1(key)
                 let name = key.split(' ').join('-')
                 document.querySelector(`#${name}`).addEventListener('click', function() {
                     showProject(key)
-                    addRemoveEvents(0, 0)
+                    self.refreshEvents()
                     document.querySelector('#projectHeader').textContent = `Projects: ${key}`
                 })
-                
-                // let self = this
-                // let btns = document.querySelectorAll('.removeBtn')
-                // for (let i = 0; i < btns.length; i++) {
-                //     let id = btns[i].id
-                //     document.querySelector(`#${id}`).addEventListener('click', function() {
-                //         console.log(id)
-                //         self.removeTodo(key, id)
-                //         showProject(key)
-                //     })
-                // }
+
             }
             document.querySelector('#projectHeader').textContent = `Projects: Inbox`
         } else {
@@ -46,28 +34,18 @@ class Storage {
             }
             this.refreshLocalStorage(this.storage)
             showProject('Inbox')
-            addRemoveEvents(0, 0)
+            this.refreshEvents()
+            let self = this
             for (let key in this.storage) {
-                // openProject(key)
                 let name = key.split(' ').join('-')
                 document.querySelector(`#${name}`).addEventListener('click', function() {
                     showProject(key)
-                    addRemoveEvents(0, 0)
+                    self.refreshEvents()
                     document.querySelector('#projectHeader').textContent = `Projects: ${key}`
                 })
-            
-                // let self = this
-                // let btns = document.querySelectorAll('.removeBtn')
-                // for (let i = 0; i < btns.length; i++) {
-                //     let id = btns[i].id
-                //     document.querySelector(`#${id}`).addEventListener('click', function() {
-                //         console.log(id)
-                //         self.removeTodo(key, id)
-                //         showProject(key)
-                //     })
-                // }
             }
-            document.querySelector('#projectHeader').textContent = `Projects: Inbox`
+            let projectName = document.querySelector('#projectHeader').textContent.slice(10)
+            document.querySelector('#projectHeader').textContent = `Projects: ${projectName}`
         }
     }
 
@@ -79,14 +57,14 @@ class Storage {
         this.storage[projectName] = []
         this.refreshLocalStorage(this.storage)
         showProject(projectName)
-        addRemoveEvents(0, 0)
+        this.refreshEvents()
     }
 
     createTodo(projectName, content) {
         this.storage[projectName].push(content)
         this.refreshLocalStorage(this.storage)
         showProject(projectName)
-        addRemoveEvents(0, 0)
+        this.refreshEvents()
     }
 
     removeTodo(projectName, todoTitle) {
@@ -97,7 +75,7 @@ class Storage {
             }
         }
         showProject(projectName)
-        addRemoveEvents(0, 0)
+        this.refreshEvents()
         
     }
 
@@ -107,6 +85,20 @@ class Storage {
     
     set currentStorage(value) {
         this.storage = value
+    }
+
+    refreshEvents() {
+        let self = this
+        let btns = document.querySelectorAll('.removeBtn')
+        let projectName = document.querySelector('#projectHeader').textContent.slice(10)
+        for (let i = 0; i < btns.length; i++) {
+            let id = btns[i].id
+            document.querySelector(`#${id}`).addEventListener('click', function() {
+                console.log(projectName)
+                console.log(id)    
+                self.removeTodo(projectName, id)
+            })
+        }
     }
 }
 

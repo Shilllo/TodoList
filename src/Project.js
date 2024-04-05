@@ -55,11 +55,6 @@ function showProject(projectName) {
             remove.classList.add('removeBtn')
             remove.setAttribute('id', storageProject[i]['title'])
 
-            // remove.addEventListener('click', function() {
-            //     console.log(storageProject[i]['title'])
-            //     instance.removeTodo(projectName, storageProject[i]['title'])
-            // })
-
             buttons.appendChild(remove)
     
             block.appendChild(title)

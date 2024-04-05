@@ -1,4 +1,4 @@
-import { createTodo, createProject, openProject } from "./events"
+import { createTodo, createProject } from "./events"
 
 function startEvents(instance) {
     createProject(instance)
