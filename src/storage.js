@@ -1,5 +1,5 @@
 import { showProject } from "./Project"
-import { openProject } from "./events"
+import { addRemoveEvents } from "./events"
 
 class Storage {
     constructor() {
@@ -18,7 +18,24 @@ class Storage {
                     project.setAttribute('id', id)
                     customProjects.appendChild(project)
                 }
-                openProject(key)
+                // openProject1(key)
+                let name = key.split(' ').join('-')
+                document.querySelector(`#${name}`).addEventListener('click', function() {
+                    showProject(key)
+                    addRemoveEvents(0, 0)
+                    document.querySelector('#projectHeader').textContent = `Projects: ${key}`
+                })
+                
+                // let self = this
+                // let btns = document.querySelectorAll('.removeBtn')
+                // for (let i = 0; i < btns.length; i++) {
+                //     let id = btns[i].id
+                //     document.querySelector(`#${id}`).addEventListener('click', function() {
+                //         console.log(id)
+                //         self.removeTodo(key, id)
+                //         showProject(key)
+                //     })
+                // }
             }
             document.querySelector('#projectHeader').textContent = `Projects: Inbox`
         } else {
@@ -29,8 +46,26 @@ class Storage {
             }
             this.refreshLocalStorage(this.storage)
             showProject('Inbox')
+            addRemoveEvents(0, 0)
             for (let key in this.storage) {
-                openProject(key)
+                // openProject(key)
+                let name = key.split(' ').join('-')
+                document.querySelector(`#${name}`).addEventListener('click', function() {
+                    showProject(key)
+                    addRemoveEvents(0, 0)
+                    document.querySelector('#projectHeader').textContent = `Projects: ${key}`
+                })
+            
+                // let self = this
+                // let btns = document.querySelectorAll('.removeBtn')
+                // for (let i = 0; i < btns.length; i++) {
+                //     let id = btns[i].id
+                //     document.querySelector(`#${id}`).addEventListener('click', function() {
+                //         console.log(id)
+                //         self.removeTodo(key, id)
+                //         showProject(key)
+                //     })
+                // }
             }
             document.querySelector('#projectHeader').textContent = `Projects: Inbox`
         }
@@ -44,12 +79,14 @@ class Storage {
         this.storage[projectName] = []
         this.refreshLocalStorage(this.storage)
         showProject(projectName)
+        addRemoveEvents(0, 0)
     }
 
     createTodo(projectName, content) {
         this.storage[projectName].push(content)
         this.refreshLocalStorage(this.storage)
         showProject(projectName)
+        addRemoveEvents(0, 0)
     }
 
     removeTodo(projectName, todoTitle) {
@@ -57,9 +94,11 @@ class Storage {
             if (this.storage[projectName][i]['title'] == todoTitle) {
                 this.storage[projectName].splice(i, 1)
                 this.refreshLocalStorage(this.storage)
-                showProject(projectName)
             }
         }
+        showProject(projectName)
+        addRemoveEvents(0, 0)
+        
     }
 
     get currentStorage() {
@@ -69,10 +108,6 @@ class Storage {
     set currentStorage(value) {
         this.storage = value
     }
-
-    // get currentProject() {
-    //     return 
-    // }
 }
 
 export { Storage }
