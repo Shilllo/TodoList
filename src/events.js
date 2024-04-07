@@ -6,12 +6,15 @@ function createProject(instance) {
             let projectForm = document.createElement('form')
             projectForm.setAttribute('id', 'projectForm')
             projectForm.method = 'GET'
+
             let label = document.createElement('label')
             label.setAttribute('for', 'projectName')
             label.textContent = `Your project's title`
+
             let input = document.createElement('input')
             input.setAttribute('type', 'text')
             input.setAttribute('id', 'projectName')
+
             let button = document.createElement('button')
             button.type = 'button'
             button.textContent = 'Create'
@@ -27,7 +30,7 @@ function createProject(instance) {
                 if (document.querySelector('#projectName').value) {
                     let projectName = document.querySelector('#projectName').value.toString()
                     addProject(projectName, instance)
-                    openProject(document.querySelector('#projectName').value, instance)
+                    openProject(projectName, instance)
                     instance.refreshEvents() 
                     projectForm.remove();
                 }
@@ -79,25 +82,8 @@ function openProject(projectName, instance) {
     })
 }
 
-function addRemoveEvents(instance, flag = 1) {
-    let btns = document.querySelectorAll('.removeBtn')
-    let projectName = document.querySelector('#projectHeader').textContent.slice(10)
-    for (let i = 0; i < btns.length; i++) {
-        let id = btns[i].id
-        document.querySelector(`#${id}`).addEventListener('click', function() {
-            console.log(projectName)
-            console.log(id)
-            console.log(flag)
-            if (flag) {
-                instance.removeTodo(projectName, id)
-            }
-        })
-    }
-}
-
 export {
     createProject, 
     createTodo,
     openProject,
-    addRemoveEvents
 }

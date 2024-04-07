@@ -27,6 +27,8 @@ function showProject(projectName) {
     
             let status = document.createElement('select')
             status.classList.add('status')
+            status.setAttribute('id', 'status')
+            status.setAttribute('name', 'status')
     
             let optionNotStarted = document.createElement('option')
             optionNotStarted.text = 'Not started'
