@@ -23,7 +23,6 @@ class Storage {
                     document.querySelector('#projectHeader').textContent = `Projects: ${key}`
                     self.refreshEvents()
                 })
-
             }
             document.querySelector('#projectHeader').textContent = `Projects: Inbox`
         } else {
@@ -48,6 +47,7 @@ class Storage {
             // document.querySelector('#projectHeader').textContent = `Projects: ${projectName}`
             document.querySelector('#projectHeader').textContent = `Projects: Inbox`
         }
+        this.refreshEvents()
     }
 
     refreshLocalStorage(value) {

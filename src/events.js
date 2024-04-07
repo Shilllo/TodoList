@@ -42,7 +42,7 @@ function createProject(instance) {
                   if (document.querySelector('#projectName').value) {
                     let projectName = document.querySelector('#projectName').value.toString()
                     addProject(projectName, instance)
-                    openProject(document.querySelector('#projectName').value, instance)
+                    openProject(projectName, instance)
                     instance.refreshEvents() 
                     projectForm.remove();
                     }
