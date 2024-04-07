@@ -37,6 +37,7 @@
     "css-select": "^4.3.0",
     "css-what": "^6.1.0",
     "cssesc": "^3.0.0",
+    "date-fns": "^3.6.0",
     "dom-converter": "^0.2.0",
     "dom-serializer": "^1.4.1",
     "domelementtype": "^2.3.0",

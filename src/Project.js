@@ -48,10 +48,6 @@ function showProject(projectName) {
             let buttons = document.createElement('div')
             buttons.classList.add('buttons')
     
-            let edit = document.createElement('button')
-            edit.textContent = 'Edit'
-            buttons.appendChild(edit)
-    
             let remove = document.createElement('button')
             remove.textContent = 'Remove'
             remove.classList.add('removeBtn')

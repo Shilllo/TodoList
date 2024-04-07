@@ -43,8 +43,6 @@ class Storage {
                     self.refreshEvents()
                 })
             }
-            // let projectName = document.querySelector('#projectHeader').textContent.slice(10)
-            // document.querySelector('#projectHeader').textContent = `Projects: ${projectName}`
             document.querySelector('#projectHeader').textContent = `Projects: Inbox`
         }
         this.refreshEvents()
@@ -92,12 +90,9 @@ class Storage {
         let self = this
         let btns = document.querySelectorAll('.removeBtn')
         let projectName = document.querySelector('#projectHeader').textContent.slice(10)
-        console.log(projectName)
         for (let i = 0; i < btns.length; i++) {
             let id = btns[i].id
             document.querySelector(`#${id}`).addEventListener('click', function() {
-                // console.log(projectName)
-                // console.log(id)    
                 self.removeTodo(projectName, id)
             })
         }
